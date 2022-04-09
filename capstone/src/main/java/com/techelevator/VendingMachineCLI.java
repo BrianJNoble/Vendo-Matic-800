@@ -76,15 +76,16 @@ public class VendingMachineCLI {
 					if (choice2.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						Scanner userInput = new Scanner(System.in);
 						System.out.println("Enter a valid whole bill amount ($1, $2, $5, $10, $20");
-						vendingMachine.feedMoney(userInput.nextInt());
+						vendingMachine.feedMoney(Integer.parseInt(userInput.next().replaceAll("[^0-9]", "")));
 
 					} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 						vendingMachine.displayMenuItems();
 						Scanner userInput = new Scanner(System.in);
 						System.out.println("Enter a valid item code");
 						String itemCode = userInput.next().toUpperCase(Locale.ROOT);
-
-						vendingMachine.dispenseItem(itemCode);
+						if(vendingMachine.getItemCost(itemCode) <= vendingMachine.getCurrentMoney()) {
+							vendingMachine.dispenseItem(itemCode);
+						}
 
 					} else if (choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
 						purchasing = false;

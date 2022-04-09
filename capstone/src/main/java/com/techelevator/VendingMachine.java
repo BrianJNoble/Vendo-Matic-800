@@ -115,6 +115,4 @@ public class VendingMachine {
         }
         return itemCost;
     }
-
-    // todo: add getItemPrice method
 }
