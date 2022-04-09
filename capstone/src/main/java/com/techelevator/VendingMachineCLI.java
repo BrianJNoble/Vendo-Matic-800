@@ -85,14 +85,24 @@ public class VendingMachineCLI {
 						String itemCode = userInput.next().toUpperCase(Locale.ROOT);
 						if(vendingMachine.getItemCost(itemCode) <= vendingMachine.getCurrentMoney()) {
 							vendingMachine.dispenseItem(itemCode);
+						} else {
+							System.out.println("Not enough money.");
 						}
 
 					} else if (choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+						vendingMachine.finishTransaction();
 						purchasing = false;
-
 					}
 					System.out.println("Current money provided: " + "$" + vendingMachine.getCurrentMoney());
-					choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					if(purchasing)
+					{
+						choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
+					} else {
+						choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
+						if(choice.equals(MAIN_MENU_OPTION_EXIT)) {
+							System.exit(0);
+						}
+					}
 				}
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				// do exit

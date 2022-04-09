@@ -31,6 +31,7 @@ public class VendingMachine {
     public void feedMoney(int amount) {
         if(amount == 1 || amount == 2 || amount == 5 || amount == 10 || amount == 20) {
             currentMoney += amount;
+            Log.log("FEED MONEY: " + "$" + amount + ".00 " + "$" + currentMoney);
         } else {
             System.out.println("Please enter a valid whole bill amount ($1, $2, $5, $10, $20");
         }
@@ -72,6 +73,9 @@ public class VendingMachine {
                     itemSplit[4] = String.valueOf(Integer.parseInt(itemSplit[4]) - 1);
                     String str = String.join("|", itemSplit);
                     inventoryList.set(i, str);
+                    Log.log(itemSplit[1] + " " + itemSplit[0] + " $" + currentMoney + " $" + (Math.round((currentMoney-this.getItemCost(itemCode))*100.0)/100.0));
+                    currentMoney -= this.getItemCost(itemCode);
+                    currentMoney = Math.round(currentMoney * 100.0)/100.0;
                 }
                 else if(Integer.parseInt(itemSplit[4]) == 1) {
                     if(item.contains("Chip")) {
@@ -88,6 +92,8 @@ public class VendingMachine {
                     itemSplit[4] = "Sold out!";
                     String str = String.join("|", itemSplit);
                     inventoryList.set(i, str);
+                    currentMoney -= this.getItemCost(itemCode);
+                    currentMoney = Math.round(currentMoney*100.0)/100.0;
                 } else {
                     System.out.println("Item is sold out!");
                 }
@@ -115,4 +121,18 @@ public class VendingMachine {
         }
         return itemCost;
     }
+
+    public void finishTransaction() {
+        Log.log("GIVE CHANGE: $" + currentMoney + " $0");
+        int quarters = (int)Math.floor((currentMoney*100)/25);
+        currentMoney = (Math.round((currentMoney%0.25)*100.0))/100.0;
+        int dimes = (int)Math.floor((currentMoney*100)/10);
+        currentMoney = (Math.round((currentMoney%0.10)*100.0))/100.0;
+        int nickels = (int)Math.floor((currentMoney*100)/5);
+        currentMoney = 0;
+        System.out.println("Dispensing " + quarters + " quarters");
+        System.out.println("Dispensing " + dimes + " dimes");
+        System.out.println("Dispensing " + nickels + " nickels");
+    }
+
 }
