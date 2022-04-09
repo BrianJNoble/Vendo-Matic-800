@@ -75,7 +75,7 @@ public class VendingMachineCLI {
 				while(purchasing) {
 					if (choice2.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 						Scanner userInput = new Scanner(System.in);
-						System.out.println("Enter a valid whole bill amount ($1, $2, $5, $10, $20");
+						System.out.println("Enter a valid whole bill amount ($1, $2, $5, $10, $20)");
 						vendingMachine.feedMoney(Integer.parseInt(userInput.next().replaceAll("[^0-9]", "")));
 
 					} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
