@@ -137,12 +137,12 @@ public class VendingMachine {
         return itemCost;
     }
 
-
+    // dispenses change and sets current money to 0
     public void finishTransaction() {
         Log.log("GIVE CHANGE: $" + currentMoney + " $0");
-        int quarters = (int)Math.floor((currentMoney*100)/25);
-        currentMoney = (Math.round((currentMoney%0.25)*100.0))/100.0;
-        int dimes = (int)Math.floor((currentMoney*100)/10);
+        int quarters = (int)Math.floor((currentMoney*100)/25); // multiply by 100 to make sure there's a whole number before dividing by 25 to get the amount of quarters
+        currentMoney = (Math.round((currentMoney%0.25)*100.0))/100.0; // set currentMoney to the remaining balance (using Math.round to avoid floating point errors)
+        int dimes = (int)Math.floor((currentMoney*100)/10); // same as above but with dimes
         currentMoney = (Math.round((currentMoney%0.10)*100.0))/100.0;
         int nickels = (int)Math.floor((currentMoney*100)/5);
 

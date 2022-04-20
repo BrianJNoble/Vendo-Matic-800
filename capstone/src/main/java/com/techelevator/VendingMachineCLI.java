@@ -38,11 +38,11 @@ public class VendingMachineCLI {
 				// display vending machine inventory
 				vendingMachine.displayMenuItems();
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
+				// display purchase menu options
 				String choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 				boolean purchasing = true;
 				while(purchasing) {
-					if (choice2.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
+					if (choice2.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) { // if feed money is selected, it prompts the user and then calls the feedMoney function
 
 						Scanner userInput = new Scanner(System.in);
 						System.out.println("Enter a valid whole bill amount ($1, $2, $5, $10, $20)");
@@ -50,14 +50,14 @@ public class VendingMachineCLI {
 						System.out.println("Current money provided: " + "$" + vendingMachine.getCurrentMoney());
 						choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
-					} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+					} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) { // if select product is selected, displays the current inventory and prompts the user for an item code to dispense the item
 
 						vendingMachine.displayMenuItems();
 						Scanner userInput = new Scanner(System.in);
 						System.out.println("Enter a valid item code");
 						String itemCode = userInput.next().toUpperCase(Locale.ROOT);
 
-						if(vendingMachine.getItemCost(itemCode) <= vendingMachine.getCurrentMoney()) {
+						if(vendingMachine.getItemCost(itemCode) <= vendingMachine.getCurrentMoney()) { // checks to make sure the user has enough money
 							vendingMachine.dispenseItem(itemCode);
 						} else {
 							System.out.println("Not enough money.");
@@ -66,15 +66,14 @@ public class VendingMachineCLI {
 						System.out.println("Current money provided: " + "$" + vendingMachine.getCurrentMoney());
 						choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
-					} else if (choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
+					} else if (choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) { // finishes the transaction and goes back to the main menu
 
 						vendingMachine.finishTransaction();
 						purchasing = false;
 
 					}
 				}
-			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-				// do exit
+			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) { // exits the application
 				System.exit(0);
 			}
 		}
