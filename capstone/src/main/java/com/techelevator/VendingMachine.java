@@ -39,7 +39,7 @@ public class VendingMachine {
     public void feedMoney(int amount) {
         if(amount == 1 || amount == 2 || amount == 5 || amount == 10 || amount == 20) { // only accepts valid bill sizes
             currentMoney += amount;
-            Log.log("FEED MONEY: " + "$" + amount + ".00 " + "$" + currentMoney);
+            Log.log("FEED MONEY: " + "$" + amount + ".00 " + "$" + String.format("%.2f", currentMoney));
         } else {
             System.out.println("Please enter a valid whole bill amount ($1, $2, $5, $10, $20)");
         }
@@ -86,7 +86,7 @@ public class VendingMachine {
                     String str = String.join("|", itemSplit);
                     inventoryList.set(i, str);
                     // Log the purchase. "Potato Crisps A1 $Before $After"
-                    Log.log(itemSplit[1] + " " + itemSplit[0] + " $" + currentMoney + " $" + (Math.round((currentMoney-this.getItemCost(itemCode))*100.0)/100.0));
+                    Log.log(itemSplit[1] + " " + itemSplit[0] + " $" + String.format("%.2f", currentMoney) + " $" + String.format("%.2f", Math.round((currentMoney-this.getItemCost(itemCode))*100.0)/100.0));
                     currentMoney -= this.getItemCost(itemCode);
                     currentMoney = Math.round(currentMoney * 100.0)/100.0;
                 }
@@ -139,7 +139,7 @@ public class VendingMachine {
 
     // dispenses change and sets current money to 0
     public void finishTransaction() {
-        Log.log("GIVE CHANGE: $" + currentMoney + " $0");
+        Log.log("GIVE CHANGE: $" + String.format("%.2f", currentMoney) + " $0.00");
         int quarters = (int)Math.floor((currentMoney*100)/25); // multiply by 100 to make sure there's a whole number before dividing by 25 to get the amount of quarters
         currentMoney = (Math.round((currentMoney%0.25)*100.0))/100.0; // set currentMoney to the remaining balance (using Math.round to avoid floating point errors)
         int dimes = (int)Math.floor((currentMoney*100)/10); // same as above but with dimes

@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 public class Log {
     public static void log(String message) {
         File file = new File("C:\\Users\\zanka\\Desktop\\meritamerica\\repos\\module-1-capstone\\capstone\\log.txt");
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        // DateTimeFormatter allows us to manipulate the LocalDateTime object, normally LocalDateTime.toString prints out in YYYY-MM-DDTHH:MM:SS format
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a");
         LocalDateTime currentDateTime = LocalDateTime.now();
         try {
             file.createNewFile();

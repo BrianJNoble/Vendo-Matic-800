@@ -47,7 +47,7 @@ public class VendingMachineCLI {
 						Scanner userInput = new Scanner(System.in);
 						System.out.println("Enter a valid whole bill amount ($1, $2, $5, $10, $20)");
 						vendingMachine.feedMoney(Integer.parseInt(userInput.next().replaceAll("[^0-9]", "")));
-						System.out.println("Current money provided: " + "$" + vendingMachine.getCurrentMoney());
+						System.out.println("Current money provided: " + "$" + String.format("%.2f", vendingMachine.getCurrentMoney()));
 						choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
 					} else if (choice2.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) { // if select product is selected, displays the current inventory and prompts the user for an item code to dispense the item
@@ -63,7 +63,7 @@ public class VendingMachineCLI {
 							System.out.println("Not enough money.");
 						}
 
-						System.out.println("Current money provided: " + "$" + vendingMachine.getCurrentMoney());
+						System.out.println("Current money provided: " + "$" + String.format("%.2f", vendingMachine.getCurrentMoney()));
 						choice2 = (String) menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
 					} else if (choice2.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) { // finishes the transaction and goes back to the main menu
